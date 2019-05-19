@@ -1,0 +1,1 @@
+export { DomainConfiguration } from './containers';

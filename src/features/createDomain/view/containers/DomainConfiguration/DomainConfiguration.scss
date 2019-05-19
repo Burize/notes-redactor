@@ -1,0 +1,12 @@
+.domain-configuration {
+  $root: &;
+
+  &__row {
+    display: flex;
+
+    #{$root}__field {
+      margin-right: 1rem;
+    }
+  }
+
+}
