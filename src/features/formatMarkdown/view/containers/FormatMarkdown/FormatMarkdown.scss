@@ -1,5 +1,8 @@
-.domain-configuration {
+.format-markdown {
   $root: &;
+
+  display: flex;
+  justify-content: space-between;
 
   &__row {
     display: flex;

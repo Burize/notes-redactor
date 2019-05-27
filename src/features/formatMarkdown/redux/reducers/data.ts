@@ -4,9 +4,9 @@ import { initial } from '../initial';
 export function dataReducer(state: NS.IReduxState['data'] = initial.data, action: NS.Action): NS.IReduxState['data'] {
   switch (action.type) {
 
-    case 'CREATE_DOMAIN:LOAD_COUNTRIES_COMPLETE': {
-      const { countries } = action.payload;
-      return { ...state, countries: [...countries] };
+    case 'FORMAT_MARKDOWN:SET_MARKDOWN': {
+      const { id, markdown } = action.payload;
+      return { ...state, markdowns: { ...state.markdowns, [id]: markdown } };
     }
     default: return state;
   }

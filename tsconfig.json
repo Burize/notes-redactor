@@ -15,7 +15,8 @@
       "es5",
       "dom",
       "scripthost",
-      "esnext"
+      "esnext",
+      "webworker"
     ],
     "jsx": "react",
     "experimentalDecorators": true,

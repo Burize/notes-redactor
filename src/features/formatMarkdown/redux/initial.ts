@@ -1,15 +1,12 @@
 import { initialCommunicationField } from 'shared/helpers/redux/initialCommunicationField';
 import * as NS from '../namespace';
+import { MOCK_ID } from '../constants';
 
 export const initial: NS.IReduxState = {
   communication: {
     loadingCountries: initialCommunicationField,
   },
   data: {
-    countries: [
-      { code: 'ru', title: 'Russia' },
-      { code: 'us', title: 'Amerika' },
-      { code: 'uk', title: 'United Kingdom' },
-    ],
+    markdowns: { [MOCK_ID]: 'initial markdown' },
   },
 };

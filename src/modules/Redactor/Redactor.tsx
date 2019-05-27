@@ -4,14 +4,14 @@ import { Route, Redirect, Switch } from 'react-router-dom';
 import { IModule } from 'shared/types/app';
 import { routes } from 'modules/routes';
 
-import { Domain } from './view';
+import { Redactor } from './view';
 
 const DomainModule: IModule = {
   getRoutes() {
     return (
       <Route key="createDomain" path={routes.domain}>
         <Switch>
-          <Route path={routes.domain} component={Domain} />
+          <Route path={routes.domain} component={Redactor} />
           <Redirect to={routes.domain} />
         </Switch>
       </Route>

@@ -22,6 +22,7 @@ const config: webpack.Configuration = {
   output: {
     path: commonPaths.outputPath,
     publicPath: '/',
+    globalObject: 'this',
   },
   module: {
     rules: [
@@ -38,7 +39,7 @@ const config: webpack.Configuration = {
         loader: 'ts-loader',
         options: {
           transpileOnly: true,
-        }
+        },
       },
       {
         test: /\.scss$/,

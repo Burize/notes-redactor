@@ -1,9 +1,5 @@
 import * as React from 'react';
 import { block } from 'bem-cn';
-import ALayout from 'antd/lib/layout';
-import 'antd/lib/layout/style/index.less';
-
-const { Header, Footer, Content } = ALayout;
 
 import './Layout.scss';
 
@@ -13,11 +9,9 @@ class Layout extends React.PureComponent {
   public render() {
     const { children } = this.props;
     return (
-      <ALayout className={b()}>
-        <Header />
-        <Content className={b('content').toString()}>{children}</Content>
-        <Footer />
-      </ALayout>
+      <div className={b()}>
+        <div className={b('content')}>{children}</div>
+      </div>
     );
   }
 }

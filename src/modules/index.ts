@@ -1,1 +1,1 @@
-export { default as DomainModule } from './Domain/Domain';
+export { default as RedactorModule } from './Redactor/Redactor';

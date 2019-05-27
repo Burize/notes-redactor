@@ -1,7 +1,7 @@
 import { Reducer } from 'redux';
 import { SagaIterator } from 'redux-saga';
 
-import { namespace as CreateDomainNamespace } from 'features/createDomain';
+import { namespace as FormatMarkdownNamespace } from 'features/formatMarkdown';
 import { Api } from 'services/api';
 
 export interface IReduxEntry<EntryState> {
@@ -11,7 +11,7 @@ export interface IReduxEntry<EntryState> {
 export type RootSaga = (deps: IDependencies) => SagaIterator;
 
 export interface IAppReduxState {
-  createDomain: CreateDomainNamespace.IReduxState;
+  formatMarkdown: FormatMarkdownNamespace.IReduxState;
 }
 
 export interface IPlainAction<T> {
