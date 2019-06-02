@@ -15,12 +15,12 @@ function RawMarkdown(props: IProps) {
 
   const onMarkdownChange = React.useCallback(
     (e: React.ChangeEvent<HTMLTextAreaElement>) => onChange(e.target.value),
-    [],
+    [onChange],
   );
 
   return (
     <div className={b()}>
-      <textarea className={b('text-field')} value={value} onChange={onMarkdownChange} rows={15} cols={50} />
+      <textarea className={b('text-field')} value={value} onChange={onMarkdownChange} rows={15} />
     </div>
   );
 }

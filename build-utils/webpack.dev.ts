@@ -22,8 +22,6 @@ const config: webpack.Configuration & { devServer: any } = { // devServer is not
           {
             loader: 'css-loader',
             options: {
-              modules: true,
-              camelCase: true,
               sourceMap: true,
             },
           },

@@ -4,15 +4,16 @@ import { Switch, BrowserRouter, Redirect } from 'react-router-dom';
 
 import * as modules from 'modules';
 import { defaultRoute } from 'modules/routes';
+import 'shared/styles/fonts/index.scss';
 
 import configureStore from './configure/configureStore';
 
-import 'shared/styles/fonts/index.scss';
+import 'semantic-ui-css/semantic.min.css';
+
+// import './registerWorkers';
 import './App.scss';
 
 const { store } = configureStore();
-
-
 
 const App = () => {
   return (

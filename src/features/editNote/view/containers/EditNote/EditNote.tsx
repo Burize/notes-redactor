@@ -2,15 +2,15 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { block } from 'bem-cn';
 
+import { markdownManager } from 'services/markdown';
 import { IAppReduxState } from 'shared/types/redux';
+import { Grid } from 'shared/view/elements';
 
 import { selectors, actions } from '../../../redux';
+import { Note, RawMarkdown } from '../../components';
+import { MOCK_ID } from '../../../constants';
 
-import './FormatMarkdown.scss';
-import { parseMarkdown, markdownManager } from 'services/markdown';
-
-import { ParsedMarkdown, RawMarkdown } from '../../components';
-import { MOCK_ID } from 'features/formatMarkdown/constants';
+import './EditNote.scss';
 
 const b = block('format-markdown');
 
@@ -21,27 +21,34 @@ interface IStateProps {
 type IActionsDispatch = typeof actionsDispatch;
 
 type IProps = IActionsDispatch & IStateProps;
-const FormatMarkdown = (props: IProps) => {
+const EditNote = (props: IProps) => {
   const { markdown, setMarkdown } = props;
   const [parsedMarkdown, setParsedMarkdown] = React.useState('');
+  const [noteTitle, setNoteTitle] = React.useState('New amazing note');
 
   if (!markdown) {
     return null;
   }
 
+  const onMarkdownChange = React.useCallback((value: string) => setMarkdown({ id: MOCK_ID, markdown: value }), []);
   React.useEffect(() => {
     (async () => {
       const handledMarkdown = await markdownManager.parseMarkdown(markdown);
       setParsedMarkdown(handledMarkdown);
     })();
   }, [markdown]);
-  const onMarkdownChange = React.useCallback((value: string) => setMarkdown({ id: MOCK_ID, markdown: value }), []);
 
   return (
-    <div className={b()}>
-      <RawMarkdown value={markdown} onChange={onMarkdownChange} />
-      <ParsedMarkdown parsedMarkdown={parsedMarkdown} />
-    </div>
+    <Grid columns="equal" className={b()}>
+      <Grid.Row>
+        <Grid.Column>
+          <RawMarkdown value={markdown} onChange={onMarkdownChange} />
+        </Grid.Column>
+        <Grid.Column>
+          <Note title={noteTitle} onTitleChange={setNoteTitle} body={parsedMarkdown} />
+        </Grid.Column>
+      </Grid.Row>
+    </Grid>
   );
 };
 
@@ -55,4 +62,4 @@ const actionsDispatch = {
   setMarkdown: actions.setMarkdown,
 };
 
-export default connect(mapState, actionsDispatch)(FormatMarkdown);
+export default connect(mapState, actionsDispatch)(EditNote);

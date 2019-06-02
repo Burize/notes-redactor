@@ -3,7 +3,7 @@ import { compose, applyMiddleware, createStore, Middleware, Store, combineReduce
 import createSagaMiddleware from 'redux-saga';
 
 import { Api } from 'services/api';
-import { reduxEntry as formatMarkdownReduxEntry } from 'features/formatMarkdown';
+import { reduxEntry as editNoteReduxEntry } from 'features/editNote';
 import { IAppReduxState, IDependencies, IReduxEntry, RootSaga } from 'shared/types/redux';
 
 import getEnvParams from 'shared/helpers/getEnvParams';
@@ -33,7 +33,7 @@ function configureStore(): IStoreData {
   const connectedReducers = {} as { [key in keyof IAppReduxState]: Reducer };
 
   const entries: Record<keyof IAppReduxState, IReduxEntry<any>> = {
-    formatMarkdown: formatMarkdownReduxEntry,
+    editNote: editNoteReduxEntry,
   };
 
   Object.keys(entries).forEach(connectEntryToStore);

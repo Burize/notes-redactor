@@ -1,7 +1,7 @@
 import { Reducer } from 'redux';
 import { SagaIterator } from 'redux-saga';
 
-import { namespace as FormatMarkdownNamespace } from 'features/formatMarkdown';
+import { namespace as EditNoteNamespace } from 'features/editNote';
 import { Api } from 'services/api';
 
 export interface IReduxEntry<EntryState> {
@@ -11,7 +11,7 @@ export interface IReduxEntry<EntryState> {
 export type RootSaga = (deps: IDependencies) => SagaIterator;
 
 export interface IAppReduxState {
-  formatMarkdown: FormatMarkdownNamespace.IReduxState;
+  editNote: EditNoteNamespace.IReduxState;
 }
 
 export interface IPlainAction<T> {

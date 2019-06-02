@@ -22,9 +22,7 @@ const config: webpack.Configuration = {
           {
             loader: 'css-loader',
             options: {
-              modules: true,
               importLoaders: 1,
-              camelCase: true,
               sourceMap: true,
             },
           },
