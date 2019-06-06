@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { block } from 'bem-cn';
+import { block } from 'shared/helpers/bem';
 
 import { Menu, Button, Container } from 'shared/view/elements';
 
@@ -18,7 +18,7 @@ export default function (props: IProps) {
   return (
     <div className={b()}>
       {header}
-      <Container>{children}</Container>
+      <Container className={b('content')}>{children}</Container>
     </div>
   );
 }

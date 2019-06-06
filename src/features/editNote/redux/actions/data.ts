@@ -1,8 +1,8 @@
 import * as NS from '../../namespace';
 
-export function setMarkdown(payload: NS.ISetMarkdown['payload']): NS.ISetMarkdown {
+export function updateNote(payload: NS.IUpdateNote['payload']): NS.IUpdateNote {
   return {
-    type: 'FORMAT_MARKDOWN:SET_MARKDOWN',
+    type: 'EDIT_NOTE:UPDATE_NOTE',
     payload,
   };
 }

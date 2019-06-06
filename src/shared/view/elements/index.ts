@@ -14,4 +14,5 @@ export {
   Visibility,
   Input,
   TextArea,
+  Modal,
 } from 'semantic-ui-react';

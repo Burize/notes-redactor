@@ -13,7 +13,7 @@
       "command": "node node_modules/.bin/webpack-dev-server --config webpack.config.ts",
       "env": {
         "NODE_ENV": "development",
-        "API_URL": "http://localhost:3030/",
+        "API_URL": "http://localhost:3000/",
         "TS_NODE_COMPILER_OPTIONS": "{\"target\": \"es5\", \"module\": \"commonjs\"}"
       }
     },
@@ -21,7 +21,7 @@
       "command": "node node_modules/.bin/webpack-dev-server --config webpack.config.ts",
       "env": {
         "NODE_ENV": "production",
-        "API_URL": "http://localhost:3030/",
+        "API_URL": "http://localhost:3000/",
         "TS_NODE_COMPILER_OPTIONS": "{\"target\": \"es5\", \"module\": \"commonjs\"}"
       }
     },
@@ -54,7 +54,6 @@
     "awesome-typescript-loader": "^5.2.1",
     "axios": "^0.18.0",
     "babel-loader": "^8.0.5",
-    "bem-cn": "^3.0.1",
     "classnames": "^2.2.6",
     "css-loader": "^2.1.1",
     "decko": "^1.2.0",

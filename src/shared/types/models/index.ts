@@ -1,2 +1,1 @@
-export * from './country';
-export * from './domain';
+export * from './note';

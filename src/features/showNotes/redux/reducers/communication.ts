@@ -7,10 +7,10 @@ import { initial } from '../initial';
 
 export const communicationReducer = combineReducers<NS.IReduxState['communication']>({
 
-  loadingNote: makeCommunicationReducer<NS.ILoadNoteById, NS.ILoadNoteByIdComplete, NS.ILoadNoteByIdFail>(
-    'EDIT_NOTE:LOAD_NOTE_BY_ID',
-    'EDIT_NOTE:LOAD_NOTE_BY_ID_COMPLETE',
-    'EDIT_NOTE:LOAD_NOTE_BY_ID_FAIL',
-    initial.communication.loadingNote,
+  loadingNotes: makeCommunicationReducer<NS.ILoadNotes, NS.ILoadNotesComplete, NS.ILoadNotesFail>(
+    'SHOW_NOTES:LOAD_NOTES',
+    'SHOW_NOTES:LOAD_NOTES_COMPLETE',
+    'SHOW_NOTES:LOAD_NOTES_FAIL',
+    initial.communication.loadingNotes,
   ),
 });

@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { block } from 'bem-cn';
+
+import { block } from 'shared/helpers/bem';
 
 import './RawMarkdown.scss';
 

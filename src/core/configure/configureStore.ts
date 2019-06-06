@@ -3,8 +3,10 @@ import { compose, applyMiddleware, createStore, Middleware, Store, combineReduce
 import createSagaMiddleware from 'redux-saga';
 
 import { Api } from 'services/api';
-import { reduxEntry as editNoteReduxEntry } from 'features/editNote';
 import { IAppReduxState, IDependencies, IReduxEntry, RootSaga } from 'shared/types/redux';
+
+import { reduxEntry as editNoteReduxEntry } from 'features/editNote';
+import { reduxEntry as showNotesReduxEntry } from 'features/showNotes';
 
 import getEnvParams from 'shared/helpers/getEnvParams';
 
@@ -34,6 +36,7 @@ function configureStore(): IStoreData {
 
   const entries: Record<keyof IAppReduxState, IReduxEntry<any>> = {
     editNote: editNoteReduxEntry,
+    showNotes: showNotesReduxEntry,
   };
 
   Object.keys(entries).forEach(connectEntryToStore);

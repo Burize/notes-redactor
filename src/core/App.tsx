@@ -21,7 +21,7 @@ const App = () => {
       <BrowserRouter>
         <Switch>
           {Object.values(modules).map(module => module.getRoutes())}
-          <Redirect to={defaultRoute} />
+          <Redirect to={defaultRoute.make()} />
         </Switch>
       </BrowserRouter>
     </Provider>

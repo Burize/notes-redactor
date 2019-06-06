@@ -7,21 +7,22 @@ import { ReturnPromisedType } from 'shared/types/utils';
 import * as actions from './actions';
 import * as NS from '../namespace';
 
-const loadBoardType: NS.ILoadCountries['type'] = 'CREATE_DOMAIN:LOAD_COUNTRIES';
+const loadNoteType: NS.ILoadNoteById['type'] = 'EDIT_NOTE:LOAD_NOTE_BY_ID';
 
 export function* rootSaga(deps: IDependencies) {
-  yield takeEvery(loadBoardType, loadBoard, deps);
+  yield takeEvery(loadNoteType, loadNote, deps);
 }
 
-export function* loadBoard({ api }: IDependencies, _action: NS.ILoadCountries) {
+export function* loadNote({ api }: IDependencies, action: NS.ILoadNoteById) {
   try {
-    const countries: ReturnPromisedType<typeof api.country.loadCountries> =
-      yield call(api.country.loadCountries);
+    const { id } = action.payload;
+    const note: ReturnPromisedType<typeof api.note.loadNoteById> =
+      yield call(api.note.loadNoteById, id);
 
-    yield put(actions.loadCountriesCompleted({ countries }));
+    yield put(actions.loadNoteCompleted({ note }));
 
   } catch (error) {
     const message = getErrorMessage(error);
-    yield put(actions.loadCountriesFailed(message));
+    yield put(actions.loadNoteFailed(message));
   }
 }

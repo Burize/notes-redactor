@@ -1,22 +1,28 @@
 import * as React from 'react';
-import { block } from 'bem-cn';
+import { RouteComponentProps } from 'react-router';
 
+import { block } from 'shared/helpers/bem';
 import { EditNote } from 'features/editNote';
+import { ShowNotesButton } from 'features/showNotes';
 import { Layout } from 'shared/view';
-
 import { Header } from 'modules/shared';
+import { routes } from 'modules/routes';
 
 const b = block('Domain');
 
-class Redactor extends React.PureComponent {
-  public render() {
+type IProps = RouteComponentProps<{ id: string }>;
 
-    return (
-      <Layout header={<Header />}>
-        <div className={b()}><EditNote /></div>
-      </Layout>
-    );
-  }
-}
+export default (props: IProps) => {
 
-export default Redactor;
+  const { history, match: { params: { id } } } = props;
+  const openNote = React.useCallback((noteId) => history.push(routes.note.make(noteId)), []);
+
+  const headerActions = [<ShowNotesButton onNoteSelect={openNote} key="1">Notes</ShowNotesButton>];
+  const header = <Header actions={headerActions} />;
+
+  return (
+    <Layout header={header}>
+      <div className={b()}><EditNote noteId={id} /></div>
+    </Layout>
+  );
+};

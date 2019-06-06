@@ -1,7 +1,12 @@
 import * as React from 'react';
 import { Menu, Button, Container } from 'shared/view/elements';
 
-function Header() {
+interface IProps {
+  actions?: React.ReactNode[];
+}
+
+function Header(props: IProps) {
+  const { actions } = props;
   return (
     <Menu
       size="large"
@@ -10,9 +15,11 @@ function Header() {
         <Menu.Item as="a" active>
           Home
         </Menu.Item>
-        <Menu.Item position="right">
-          <Button as="a">New </Button>
-        </Menu.Item>
+        {actions &&
+          <Menu.Item position="right">
+            {actions}
+          </Menu.Item>
+        }
       </Container>
     </Menu>
   );

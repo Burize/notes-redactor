@@ -2,6 +2,8 @@ import { Reducer } from 'redux';
 import { SagaIterator } from 'redux-saga';
 
 import { namespace as EditNoteNamespace } from 'features/editNote';
+import { namespace as ShowNoteseNamespace } from 'features/showNotes';
+
 import { Api } from 'services/api';
 
 export interface IReduxEntry<EntryState> {
@@ -12,6 +14,7 @@ export type RootSaga = (deps: IDependencies) => SagaIterator;
 
 export interface IAppReduxState {
   editNote: EditNoteNamespace.IReduxState;
+  showNotes: ShowNoteseNamespace.IReduxState;
 }
 
 export interface IPlainAction<T> {

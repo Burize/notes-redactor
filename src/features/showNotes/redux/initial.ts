@@ -3,9 +3,9 @@ import * as NS from '../namespace';
 
 export const initial: NS.IReduxState = {
   communication: {
-    loadingNote: initialCommunicationField,
+    loadingNotes: initialCommunicationField,
   },
   data: {
-    note: null,
+    notes: [],
   },
 };

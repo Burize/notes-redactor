@@ -1,7 +1,7 @@
-import { ICountry } from 'shared/types/models';
+import { INote } from 'shared/types/models';
 
-import { ICountryResponse } from '../types';
+import { INoteResponse } from '../types/Note';
 
-export function convertCountryResponse(countries: ICountryResponse[]): ICountry[] {
-  return countries.map(country => ({ code: country.code, title: country.title }));
+export function convertNoteResponse(note: INoteResponse): INote {
+  return { id: note.id, title: note.title, body: note.body };
 }

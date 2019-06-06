@@ -1,25 +1,23 @@
-import { ICommunication, IPlainAction, IPlainFailAction, IAction } from 'shared/types/redux';
-import { ICountry } from 'shared/types/models';
-
-export interface IOption<T = string> {
-  value: T;
-  label: string;
-}
+import { ICommunication, IPlainFailAction, IAction } from 'shared/types/redux';
+import { INote } from 'shared/types/models';
 
 export interface IReduxState {
   communication: {
-    loadingCountries: ICommunication;
+    loadingNote: ICommunication;
   };
   data: {
-    markdowns: { [id: string]: string },
+    note: INote | null,
   };
 }
 
-// export type ILoadCountries = IPlainAction<'CREATE_DOMAIN:LOAD_COUNTRIES'>;
-// export type ILoadCountriesComplete = IAction<'CREATE_DOMAIN:LOAD_COUNTRIES_COMPLETE', { countries: ICountry[] }>;
-// export type ILoadCountriesFail = IPlainFailAction<'CREATE_DOMAIN:LOAD_COUNTRIES_FAIL'>;
+type UpdatePayload = Partial<Pick<INote, 'title' | 'body'>>;
 
-export type ISetMarkdown = IAction<'FORMAT_MARKDOWN:SET_MARKDOWN', { id: string, markdown: string }>;
+export type ILoadNoteById = IAction<'EDIT_NOTE:LOAD_NOTE_BY_ID', { id: string }>;
+export type ILoadNoteByIdComplete = IAction<'EDIT_NOTE:LOAD_NOTE_BY_ID_COMPLETE', { note: INote }>;
+export type ILoadNoteByIdFail = IPlainFailAction<'EDIT_NOTE:LOAD_NOTE_BY_ID_FAIL'>;
 
-export type Action = ISetMarkdown
+export type IUpdateNote = IAction<'EDIT_NOTE:UPDATE_NOTE', UpdatePayload>;
+
+export type Action = IUpdateNote
+  | ILoadNoteById | ILoadNoteByIdComplete | ILoadNoteByIdFail
   ;

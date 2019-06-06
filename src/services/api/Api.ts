@@ -1,13 +1,13 @@
 
 import HttpActions from './HttpActions';
-import { Country } from './entities';
+import { Note } from './entities';
 
 class Api {
-  public country: Country;
+  public note: Note;
 
   constructor() {
     const actions = new HttpActions();
-    this.country = new Country(actions);
+    this.note = new Note(actions);
   }
 
 }

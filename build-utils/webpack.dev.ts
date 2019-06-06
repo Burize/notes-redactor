@@ -32,7 +32,7 @@ const config: webpack.Configuration & { devServer: any } = { // devServer is not
   plugins: [new webpack.HotModuleReplacementPlugin()],
   devServer: {
     host: 'localhost',
-    port: 3000,
+    port: 8000,
     historyApiFallback: true,
     hot: true,
     open: true,
