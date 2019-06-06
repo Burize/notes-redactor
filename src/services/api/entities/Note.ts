@@ -23,4 +23,13 @@ export default class Note extends BaseApi {
     return this.handleResponse(response, convertNoteResponse);
   }
 
+  @bind
+  public async createNote(note: Partial<INote>): Promise<INote> {
+    const response = await this.actions.post<INoteResponse>({
+      url: `note`,
+      data: { ...note },
+    });
+    return this.handleResponse(response, convertNoteResponse);
+  }
+
 }

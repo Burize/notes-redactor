@@ -26,7 +26,7 @@ function NotesList(props: IProps) {
       <Modal.Content image scrolling>
         <div>
           {notes.map(note => (
-            <div className={b('note')}><Note note={note} onSelect={onSelect} /></div>
+            <div key={note.id} className={b('note')}><Note note={note} onSelect={onSelect} /></div>
           ))}
         </div>
       </Modal.Content>

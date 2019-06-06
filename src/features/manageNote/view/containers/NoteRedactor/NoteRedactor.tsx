@@ -11,7 +11,7 @@ import { Grid, Segment } from 'shared/view/elements';
 import { selectors, actions } from '../../../redux';
 import { Note, RawMarkdown } from '../../components';
 
-import './EditNote.scss';
+import './NoteRedactor.scss';
 import { Loader, Dimmer } from 'semantic-ui-react';
 
 const b = block('edit-note');
@@ -28,12 +28,16 @@ interface IStateProps {
 type IActionsDispatch = typeof actionsDispatch;
 
 type IProps = IOwnProps & IActionsDispatch & IStateProps;
-const EditNote = (props: IProps) => {
+const NoteRedactor = (props: IProps) => {
   const { note, updateNote, noteId, loadNote, loadingNote } = props;
   const [parsedMarkdown, setParsedMarkdown] = React.useState('');
 
   React.useEffect(() => {
+    if (note && note.id === noteId) {
+      return;
+    }
     noteId && loadNote({ id: noteId });
+
   }, [noteId]);
 
   const makeChangeFieldHandler = (key: keyof INote) => (value: string) => updateNote({ [key]: value });
@@ -88,4 +92,4 @@ const actionsDispatch = {
   loadNote: actions.loadNote,
 };
 
-export default connect(mapState, actionsDispatch)(EditNote);
+export default connect(mapState, actionsDispatch)(NoteRedactor);

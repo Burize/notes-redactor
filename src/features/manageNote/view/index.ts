@@ -1,1 +1,2 @@
-export { EditNote } from './containers';
+export { NoteRedactor } from './containers';
+export { CreateNoteButton } from './containers';

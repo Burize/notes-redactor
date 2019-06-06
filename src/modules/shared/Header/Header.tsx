@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Menu, Button, Container } from 'shared/view/elements';
+import { Menu, Container } from 'shared/view/elements';
 
 interface IProps {
   actions?: React.ReactNode[];

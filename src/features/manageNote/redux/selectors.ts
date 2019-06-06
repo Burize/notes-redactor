@@ -3,7 +3,7 @@ import { IAppReduxState } from 'shared/types/redux';
 import makeCommunicationSelector from 'shared/helpers/redux/makeCommunicationSelector';
 import { INote } from 'shared/types/models';
 
-export const selectFeatureState = makeSelectFeatureState('editNote');
+export const selectFeatureState = makeSelectFeatureState('manageNote');
 
 export const selectCommunication = makeCommunicationSelector(selectFeatureState);
 

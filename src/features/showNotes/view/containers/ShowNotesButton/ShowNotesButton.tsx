@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 
-import { block } from 'shared/helpers/bem';
+// import { block } from 'shared/helpers/bem';
 import { IAppReduxState, ICommunication } from 'shared/types/redux';
 import { Button } from 'shared/view/elements';
 import { INote } from 'shared/types/models';
@@ -11,7 +11,7 @@ import { NotesList } from '../../components';
 
 import './ShowNotesButton.scss';
 
-const b = block('show-notes-button');
+// const b = block('show-notes-button');
 
 interface IStateProps {
   notes: INote[];

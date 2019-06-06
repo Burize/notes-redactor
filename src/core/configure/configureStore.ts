@@ -5,7 +5,7 @@ import createSagaMiddleware from 'redux-saga';
 import { Api } from 'services/api';
 import { IAppReduxState, IDependencies, IReduxEntry, RootSaga } from 'shared/types/redux';
 
-import { reduxEntry as editNoteReduxEntry } from 'features/editNote';
+import { reduxEntry as manageNoteReduxEntry } from 'features/manageNote';
 import { reduxEntry as showNotesReduxEntry } from 'features/showNotes';
 
 import getEnvParams from 'shared/helpers/getEnvParams';
@@ -35,7 +35,7 @@ function configureStore(): IStoreData {
   const connectedReducers = {} as { [key in keyof IAppReduxState]: Reducer };
 
   const entries: Record<keyof IAppReduxState, IReduxEntry<any>> = {
-    editNote: editNoteReduxEntry,
+    manageNote: manageNoteReduxEntry,
     showNotes: showNotesReduxEntry,
   };
 

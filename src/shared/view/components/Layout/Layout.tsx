@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { block } from 'shared/helpers/bem';
 
-import { Menu, Button, Container } from 'shared/view/elements';
+import { Container } from 'shared/view/elements';
 
 import './Layout.scss';
 
@@ -12,7 +12,7 @@ interface IProps {
   children: React.ReactNode;
 }
 
-export default function (props: IProps) {
+export default function(props: IProps) {
   const { children, header } = props;
 
   return (
