@@ -5,6 +5,7 @@ export const initial: NS.IReduxState = {
   communication: {
     loadingNote: initialCommunicationField,
     creatingNote: initialCommunicationField,
+    updatingNote: initialCommunicationField,
   },
   data: {
     note: null,

@@ -19,4 +19,10 @@ export const communicationReducer = combineReducers<NS.IReduxState['communicatio
     'MANAGE_NOTE:CREATE_NOTE_FAIL',
     initial.communication.creatingNote,
   ),
+  updatingNote: makeCommunicationReducer<NS.IUpdateNote, NS.IUpdateNoteComplete, NS.IUpdateNoteFail>(
+    'MANAGE_NOTE:UPDATE_NOTE',
+    'MANAGE_NOTE:UPDATE_NOTE_COMPLETE',
+    'MANAGE_NOTE:UPDATE_NOTE_FAIL',
+    initial.communication.updatingNote,
+  ),
 });

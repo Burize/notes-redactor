@@ -6,13 +6,15 @@ import { block } from 'shared/helpers/bem';
 import { INote } from 'shared/types/models';
 import { markdownManager } from 'services/markdown';
 import { IAppReduxState, ICommunication } from 'shared/types/redux';
-import { Grid, Segment } from 'shared/view/elements';
+import { Grid, Segment, Loader, Dimmer } from 'shared/view/elements';
+import { useDebounce } from 'shared/helpers/react';
 
 import { selectors, actions } from '../../../redux';
 import { Note, RawMarkdown } from '../../components';
 
 import './NoteRedactor.scss';
-import { Loader, Dimmer } from 'semantic-ui-react';
+import useOnChangeState from 'shared/helpers/redux/useOnStateChange';
+import { isCommunicationComplete } from 'shared/helpers/redux';
 
 const b = block('edit-note');
 
@@ -30,6 +32,9 @@ type IActionsDispatch = typeof actionsDispatch;
 type IProps = IOwnProps & IActionsDispatch & IStateProps;
 const NoteRedactor = (props: IProps) => {
   const { note, updateNote, noteId, loadNote, loadingNote } = props;
+
+  const [noteTitle, setNoteTitle] = React.useState('');
+  const [noteBody, setNoteBody] = React.useState('');
   const [parsedMarkdown, setParsedMarkdown] = React.useState('');
 
   React.useEffect(() => {
@@ -37,13 +42,22 @@ const NoteRedactor = (props: IProps) => {
       return;
     }
     noteId && loadNote({ id: noteId });
-
   }, [noteId]);
 
-  const makeChangeFieldHandler = (key: keyof INote) => (value: string) => updateNote({ [key]: value });
+  useOnChangeState(loadingNote, isCommunicationComplete, () => {
+    if (note) { // handle if false
+      setNoteTitle(note.title);
+      setNoteBody(note.body);
+    }
+  });
 
-  const onTitleChange = React.useMemo(() => makeChangeFieldHandler('title'), []);
-  const onMarkdownChange = React.useMemo(() => makeChangeFieldHandler('body'), []);
+  // maybe rework
+  const debounceNoteTitle = useDebounce(noteTitle, 1000);
+  const debounceNoteBody = useDebounce(noteBody, 1000);
+
+  React.useEffect(() => {
+    updateNote({ id: noteId, title: debounceNoteTitle, body: debounceNoteBody });
+  }, [debounceNoteTitle, debounceNoteBody]);
 
   const parseMarkdown = async (markdown: string) => {
     const handledMarkdown = await markdownManager.parseMarkdown(markdown);
@@ -51,8 +65,8 @@ const NoteRedactor = (props: IProps) => {
   };
 
   React.useEffect(() => {
-    note && parseMarkdown(note.body); // try make with body at second arg
-  }, [note]);
+    parseMarkdown(noteBody);
+  }, [noteBody]);
 
   return (
     <Segment className={b()}>
@@ -67,10 +81,10 @@ const NoteRedactor = (props: IProps) => {
           <Grid columns="equal" className={b()}>
             <Grid.Row>
               <Grid.Column>
-                <RawMarkdown value={note.body} onChange={onMarkdownChange} />
+                <RawMarkdown value={noteBody} onChange={setNoteBody} />
               </Grid.Column>
               <Grid.Column>
-                <Note title={note.title} onTitleChange={onTitleChange} body={parsedMarkdown} />
+                <Note title={noteTitle} onTitleChange={setNoteTitle} body={parsedMarkdown} />
               </Grid.Column>
             </Grid.Row>
           </Grid>

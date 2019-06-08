@@ -38,7 +38,7 @@ class HttpActions {
 
   public patch<T>(params: IHttpActionParams): AsyncRequest<T> {
     const { url, data, options } = params;
-    return this.request.post(url, data, options);
+    return this.request.patch(url, data, options);
   }
 
   public del<T>(params: IHttpActionParams): AsyncRequest<T> {

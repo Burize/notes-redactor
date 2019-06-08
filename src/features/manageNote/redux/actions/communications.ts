@@ -12,3 +12,8 @@ export const { execute: createNote, completed: createNoteCompleted, failed: crea
   makeCommunicationActionCreators<NS.ICreateNote, NS.ICreateNoteComplete, NS.ICreateNoteFail>(
     'MANAGE_NOTE:CREATE_NOTE', 'MANAGE_NOTE:CREATE_NOTE_COMPLETE', 'MANAGE_NOTE:CREATE_NOTE_FAIL',
   );
+
+export const { execute: updateNote, completed: updateNoteCompleted, failed: updateNoteFailed } =
+  makeCommunicationActionCreators<NS.IUpdateNote, NS.IUpdateNoteComplete, NS.IUpdateNoteFail>(
+    'MANAGE_NOTE:UPDATE_NOTE', 'MANAGE_NOTE:UPDATE_NOTE_COMPLETE', 'MANAGE_NOTE:UPDATE_NOTE_FAIL',
+  );

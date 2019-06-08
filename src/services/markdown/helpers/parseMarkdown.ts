@@ -11,6 +11,7 @@ export default function parseMarkdown(markdown: string): string {
     [/-\b(.+)\b-/gm, '<del>$1</del>'],
     [/\[x\]/gm, '<input type="checkbox" checked/>'],
     [/\[ \]/gm, '<input type="checkbox"/>'],
+    [/\n/gm, '<br/>'],
     [unorderedListRegex, unorderedListReplacer],
   ]);
 

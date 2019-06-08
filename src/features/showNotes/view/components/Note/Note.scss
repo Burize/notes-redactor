@@ -1,9 +1,15 @@
-.note {
+@import 'shared/styles/common/index.scss';
 
+.note {
+  padding: 0.5rem;
   cursor: pointer;
 
   &:hover {
     background-color: #EFEFEF;
+  }
+
+  &_active {
+    border-left: solid $red 5px
   }
   &__title {
     margin-bottom: 0.4rem;
@@ -13,6 +19,8 @@
 
   &__body {
     color: #A0A0A0;
+    overflow: hidden;
+    word-wrap: none;
   }
 }
 

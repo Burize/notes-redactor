@@ -15,4 +15,6 @@ export {
   Input,
   TextArea,
   Modal,
+  Loader,
+  Dimmer,
 } from 'semantic-ui-react';

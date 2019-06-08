@@ -11,6 +11,7 @@ import './NotesList.scss';
 interface IProps {
   isOpen: boolean;
   notes: INote[];
+  selectedNoteId?: string;
   onClose(): void;
   onSelect(noteId: string): void;
 }
@@ -18,15 +19,17 @@ interface IProps {
 const b = block('notes-list');
 
 function NotesList(props: IProps) {
-  const { isOpen, notes, onSelect, onClose } = props;
+  const { isOpen, notes, onSelect, onClose, selectedNoteId } = props;
 
   return (
     <Modal open={isOpen} onClose={onClose}>
       <Modal.Header>Your notes</Modal.Header>
-      <Modal.Content image scrolling>
+      <Modal.Content scrolling>
         <div>
           {notes.map(note => (
-            <div key={note.id} className={b('note')}><Note note={note} onSelect={onSelect} /></div>
+            <div key={note.id} className={b('note')}>
+              <Note note={note} onSelect={onSelect} active={note.id === selectedNoteId} />
+            </div>
           ))}
         </div>
       </Modal.Content>

@@ -1,16 +1,16 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 
-// import { block } from 'shared/helpers/bem';
 import { IAppReduxState, ICommunication } from 'shared/types/redux';
 import { Button } from 'shared/view/elements';
 import { INote } from 'shared/types/models';
+import { useOnStateChange, isCommunicationComplete } from 'shared/helpers/redux';
+import { NOTE_DEFAULT_BODY, NOTE_DEFAULT_TITLE } from 'features/manageNote/constants';
+import { GetProps } from 'shared/types/utils';
 
 import { selectors, actions } from '../../../redux';
 
 import './CreateNoteButton.scss';
-import { useOnStateChange, isCommunicationComplete } from 'shared/helpers/redux';
-import { NOTE_DEFAULT_BODY, NOTE_DEFAULT_TITLE } from 'features/manageNote/constants';
 
 interface IStateProps {
   creatingNote: ICommunication;
@@ -24,9 +24,9 @@ interface IOwnProps {
   onCreate(noteId: string): void;
 }
 
-type IProps = IOwnProps & IActionsDispatch & IStateProps;
+type IProps = IOwnProps & IActionsDispatch & IStateProps & GetProps<typeof Button>;
 const CreateNoteButton = (props: IProps) => {
-  const { children, onCreate, createNote, creatingNote, note } = props;
+  const { children, onCreate, createNote, creatingNote, note, ...buttonProps } = props;
 
   const create = React.useCallback(() => {
     createNote({ title: NOTE_DEFAULT_TITLE, body: NOTE_DEFAULT_BODY });
@@ -34,7 +34,7 @@ const CreateNoteButton = (props: IProps) => {
 
   useOnStateChange(creatingNote, isCommunicationComplete, () => { note && onCreate(note.id); });
 
-  return <Button onClick={create} disabled={creatingNote.isRequesting}>{children}</Button>;
+  return <Button onClick={create} disabled={creatingNote.isRequesting} {...buttonProps}>{children}</Button>;
 };
 
 function mapState(state: IAppReduxState): IStateProps {

@@ -2,22 +2,25 @@ import * as React from 'react';
 import { Menu, Container } from 'shared/view/elements';
 
 interface IProps {
-  actions?: React.ReactNode[];
+  leftActions?: React.ReactNode;
+  rightActions?: React.ReactNode;
 }
 
 function Header(props: IProps) {
-  const { actions } = props;
+  const { leftActions, rightActions } = props;
   return (
     <Menu
       size="large"
     >
       <Container>
-        <Menu.Item as="a" active>
-          Home
-        </Menu.Item>
-        {actions &&
+        {leftActions &&
+          <Menu.Item position="left">
+            {leftActions}
+          </Menu.Item>
+        }
+        {rightActions &&
           <Menu.Item position="right">
-            {actions}
+            {rightActions}
           </Menu.Item>
         }
       </Container>

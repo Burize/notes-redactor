@@ -1,13 +1,14 @@
-import { bind } from 'decko';
-import { INote } from 'shared/types/models';
+import { BindAll } from 'lodash-decorators';
+
+import { INote, NoteFieldsForCreation, PartialNote } from 'shared/types/models';
 
 import BaseApi from './BaseApi';
 import { convertNoteResponse } from '../converters';
 import { INoteResponse } from '../types/Note';
 
+@BindAll()
 export default class Note extends BaseApi {
 
-  @bind
   public async loadNotes(): Promise<INote[]> {
     const response = await this.actions.get<INoteResponse[]>({
       url: `notes`,
@@ -15,7 +16,6 @@ export default class Note extends BaseApi {
     return this.handleResponse<INoteResponse[], INote[]>(response, (notes) => notes.map(convertNoteResponse));
   }
 
-  @bind
   public async loadNoteById(id: string): Promise<INote> {
     const response = await this.actions.get<INoteResponse>({
       url: `note/${id}`,
@@ -23,8 +23,7 @@ export default class Note extends BaseApi {
     return this.handleResponse(response, convertNoteResponse);
   }
 
-  @bind
-  public async createNote(note: Partial<INote>): Promise<INote> {
+  public async createNote(note: NoteFieldsForCreation): Promise<INote> {
     const response = await this.actions.post<INoteResponse>({
       url: `note`,
       data: { ...note },
@@ -32,4 +31,11 @@ export default class Note extends BaseApi {
     return this.handleResponse(response, convertNoteResponse);
   }
 
+  public async updateNote(note: PartialNote): Promise<{}> {
+    const response = await this.actions.patch({
+      url: `note`,
+      data: { ...note },
+    });
+    return this.handleResponse(response);
+  }
 }
