@@ -1,1 +1,1 @@
-declare module 'serviceworker-webpack-plugin';
+declare module 'serviceworker-webpack-plugin*';

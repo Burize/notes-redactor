@@ -12,7 +12,6 @@ const createNoteType: NS.ICreateNote['type'] = 'MANAGE_NOTE:CREATE_NOTE';
 const updateNoteType: NS.IUpdateNote['type'] = 'MANAGE_NOTE:UPDATE_NOTE';
 const deleteNoteType: NS.IDeleteNote['type'] = 'MANAGE_NOTE:DELETE_NOTE';
 
-
 export function* rootSaga(deps: IDependencies) {
   yield takeEvery(loadNoteType, loadNote, deps);
   yield takeEvery(createNoteType, createNote, deps);

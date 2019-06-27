@@ -7,14 +7,14 @@ import { INote } from 'shared/types/models';
 import { markdownManager } from 'services/markdown';
 import { IAppReduxState, ICommunication } from 'shared/types/redux';
 import { Grid, Segment, Loader, Dimmer, Button, Icon } from 'shared/view/elements';
+import useOnChangeState from 'shared/helpers/redux/useOnStateChange';
+import { isCommunicationComplete } from 'shared/helpers/redux';
 import { useDebounce } from 'shared/helpers/react';
 
 import { selectors, actions } from '../../../redux';
 import { Note, RawMarkdown } from '../../components';
 
 import './NoteRedactor.scss';
-import useOnChangeState from 'shared/helpers/redux/useOnStateChange';
-import { isCommunicationComplete } from 'shared/helpers/redux';
 
 const b = block('edit-note');
 
@@ -26,14 +26,13 @@ interface IOwnProps {
 interface IStateProps {
   note: INote | null;
   loadingNote: ICommunication;
-  creatingNote: ICommunication;
 }
 
 type IActionsDispatch = typeof actionsDispatch;
 
 type IProps = IOwnProps & IActionsDispatch & IStateProps;
 const NoteRedactor = (props: IProps) => {
-  const { note, updateNote, noteId, loadNote, deleteNote, onDeleteNote, loadingNote, creatingNote } = props;
+  const { note, updateNote, noteId, loadNote, deleteNote, onDeleteNote, loadingNote } = props;
 
   const [noteTitle, setNoteTitle] = React.useState('');
   const [noteBody, setNoteBody] = React.useState('');
@@ -52,13 +51,12 @@ const NoteRedactor = (props: IProps) => {
   }, [noteId]);
 
   useOnChangeState(loadingNote, isCommunicationComplete, () => {
-    if (note) { // handle if false
+    if (note) { // TODO: handle if false
       setNoteTitle(note.title);
       setNoteBody(note.body);
     }
   });
 
-  // maybe rework
   const debounceNoteTitle = useDebounce(noteTitle, 1000);
   const debounceNoteBody = useDebounce(noteBody, 1000);
 
@@ -99,9 +97,11 @@ const NoteRedactor = (props: IProps) => {
                 <Note title={noteTitle} onTitleChange={setNoteTitle} body={parsedMarkdown} />
               </Grid.Column>
             </Grid.Row>
-            <Button onClick={onDelete}>
-              <Icon name="trash alternate" size="large" fitted />
-            </Button>
+            <Grid.Row textAlign="right" >
+              <Button onClick={onDelete}>
+                <Icon name="trash alternate" size="large" fitted />
+              </Button>
+            </Grid.Row>
           </Grid>
         )}
     </Segment>
@@ -112,7 +112,6 @@ function mapState(state: IAppReduxState): IStateProps {
   return {
     note: selectors.selectNote(state),
     loadingNote: selectors.selectCommunication(state, 'loadingNote'),
-    creatingNote: selectors.selectCommunication(state, 'creatingNote'),
   };
 }
 

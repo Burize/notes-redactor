@@ -39,7 +39,6 @@ const ShowNotesButton = (props: IProps) => {
     onNoteSelect(noteId);
   }, []);
 
-  console.log(loadingNotes);
   return (
     <>
       <Button {...buttonProps} onClick={openNoteList}>{children}</Button>
