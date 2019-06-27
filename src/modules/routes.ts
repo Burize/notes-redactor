@@ -1,8 +1,8 @@
 export const routes = {
-  note: {
-    path: '/note/:id?',
-    make: (noteId?: string) => noteId ? `/note/${noteId}` : '/note',
+  redactor: {
+    path: '/redactor/:id?',
+    make: (noteId?: string) => noteId ? `/redactor/${noteId}` : '/redactor',
   },
 };
 
-export const defaultRoute = routes.note;
+export const defaultRoute = routes.redactor;

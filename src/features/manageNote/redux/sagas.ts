@@ -10,11 +10,14 @@ import * as NS from '../namespace';
 const loadNoteType: NS.ILoadNoteById['type'] = 'MANAGE_NOTE:LOAD_NOTE_BY_ID';
 const createNoteType: NS.ICreateNote['type'] = 'MANAGE_NOTE:CREATE_NOTE';
 const updateNoteType: NS.IUpdateNote['type'] = 'MANAGE_NOTE:UPDATE_NOTE';
+const deleteNoteType: NS.IDeleteNote['type'] = 'MANAGE_NOTE:DELETE_NOTE';
+
 
 export function* rootSaga(deps: IDependencies) {
   yield takeEvery(loadNoteType, loadNote, deps);
   yield takeEvery(createNoteType, createNote, deps);
   yield takeEvery(updateNoteType, updateNote, deps);
+  yield takeEvery(deleteNoteType, deleteNote, deps);
 }
 
 export function* loadNote({ api }: IDependencies, action: NS.ILoadNoteById) {
@@ -49,5 +52,16 @@ export function* updateNote({ api }: IDependencies, action: NS.IUpdateNote) {
   } catch (error) {
     const message = getErrorMessage(error);
     yield put(actions.updateNoteFailed(message));
+  }
+}
+
+export function* deleteNote({ api }: IDependencies, action: NS.IUpdateNote) {
+  try {
+    const { id } = action.payload;
+    yield call(api.note.deleteNote, id);
+    yield put(actions.deleteNoteCompleted());
+  } catch (error) {
+    const message = getErrorMessage(error);
+    yield put(actions.deleteNoteFailed(message));
   }
 }

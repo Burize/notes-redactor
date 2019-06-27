@@ -21,13 +21,17 @@ export default (props: IProps) => {
 
   const { history, match: { params: { id } } } = props;
   const openNote = React.useCallback((noteId: string) => {
-    history.push(routes.note.make(noteId));
+    history.push(routes.redactor.make(noteId));
+  }, []);
+
+  const redirectToMain = React.useCallback(() => {
+    history.push(routes.redactor.make());
   }, []);
 
   const header = (
     <Header
       leftActions={
-        <ShowNotesButton onNoteSelect={openNote} className={b('header-button')} onasaad={'aaasd'} selectedNoteId={id}>
+        <ShowNotesButton onNoteSelect={openNote} className={b('header-button')} selectedNoteId={id}>
           <Icon name="list alternate outline" size="large" fitted />
         </ShowNotesButton>}
       rightActions={
@@ -40,7 +44,7 @@ export default (props: IProps) => {
   return (
     <Layout header={header}>
       <div className={b()}>
-        {id && <NoteRedactor noteId={id} />}
+        {id && <NoteRedactor noteId={id} onDeleteNote={redirectToMain} />}
         {!id && <CreateNewNote onCreateNote={openNote} />}
       </div>
     </Layout>

@@ -41,7 +41,7 @@ class HttpActions {
     return this.request.patch(url, data, options);
   }
 
-  public del<T>(params: IHttpActionParams): AsyncRequest<T> {
+  public delete<T>(params: IHttpActionParams): AsyncRequest<T> {
     const { url, data, options } = params;
     return this.request.delete(url, { ...options, data });
   }

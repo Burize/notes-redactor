@@ -25,4 +25,10 @@ export const communicationReducer = combineReducers<NS.IReduxState['communicatio
     'MANAGE_NOTE:UPDATE_NOTE_FAIL',
     initial.communication.updatingNote,
   ),
+  deletingNote: makeCommunicationReducer<NS.IDeleteNote, NS.IDeleteNoteComplete, NS.IDeleteNoteFail>(
+    'MANAGE_NOTE:DELETE_NOTE',
+    'MANAGE_NOTE:DELETE_NOTE_COMPLETE',
+    'MANAGE_NOTE:DELETE_NOTE_FAIL',
+    initial.communication.deletingNote,
+  ),
 });

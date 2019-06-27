@@ -29,21 +29,22 @@ const ShowNotesButton = (props: IProps) => {
   const { children, onNoteSelect, notes, loadNotes, loadingNotes, selectedNoteId, ...buttonProps } = props;
   const [isOpen, setIsOpen] = React.useState(false);
 
-  React.useEffect(() => {
+  const openNoteList = React.useCallback(() => {
+    setIsOpen(!isOpen);
     loadNotes();
   }, []);
-
-  const toggleVisible = React.useCallback(() => setIsOpen(!isOpen), []);
   const closeModal = React.useCallback(() => setIsOpen(false), []);
   const onSelect = React.useCallback((noteId: string) => {
     setIsOpen(false);
     onNoteSelect(noteId);
   }, []);
 
+  console.log(loadingNotes);
   return (
     <>
-      <Button {...buttonProps} onClick={toggleVisible} disabled={loadingNotes.isRequesting}>{children}</Button>
+      <Button {...buttonProps} onClick={openNoteList}>{children}</Button>
       <NotesList
+        isLoading={loadingNotes.isRequesting}
         notes={notes}
         isOpen={isOpen}
         onClose={closeModal}

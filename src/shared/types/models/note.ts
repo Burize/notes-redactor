@@ -4,6 +4,6 @@ export interface INote {
   body: string;
 }
 
-export type NoteFieldsForCreation = Partial<Pick<INote, 'title' | 'body'>>;
+export type NoteFieldsForCreation = Omit<INote, 'id'>;
 
-export type PartialNote = Partial<Pick<INote, 'title' | 'body'>> & { id: INote['id'] }; // TODO: rework
+export type PartialNote = Partial<Omit<INote, 'id'>> & { id: INote['id'] }; // TODO: rework

@@ -1,29 +1,32 @@
 import * as React from 'react';
 import { Provider } from 'react-redux';
-import { Switch, BrowserRouter, Redirect } from 'react-router-dom';
+import { Switch, Router, Redirect } from 'react-router-dom';
+import { createBrowserHistory } from 'history';
 
 import * as modules from 'modules';
 import { defaultRoute } from 'modules/routes';
 import 'shared/styles/fonts/index.scss';
 
-import configureStore from './configure/configureStore';
+import configureApp from './configure/configureApp';
 
 import 'semantic-ui-css/semantic.min.css';
 
-// import './registerWorkers';
+import './registerWorkers';
 import './App.scss';
 
-const { store } = configureStore();
+export const history = createBrowserHistory();
+
+const { store } = configureApp(history);
 
 const App = () => {
   return (
     <Provider store={store}>
-      <BrowserRouter>
+      <Router history={history}>
         <Switch>
           {Object.values(modules).map(module => module.getRoutes())}
           <Redirect to={defaultRoute.make()} />
         </Switch>
-      </BrowserRouter>
+      </Router>
     </Provider>
   );
 };

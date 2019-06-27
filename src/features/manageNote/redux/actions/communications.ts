@@ -17,3 +17,8 @@ export const { execute: updateNote, completed: updateNoteCompleted, failed: upda
   makeCommunicationActionCreators<NS.IUpdateNote, NS.IUpdateNoteComplete, NS.IUpdateNoteFail>(
     'MANAGE_NOTE:UPDATE_NOTE', 'MANAGE_NOTE:UPDATE_NOTE_COMPLETE', 'MANAGE_NOTE:UPDATE_NOTE_FAIL',
   );
+
+export const { execute: deleteNote, completed: deleteNoteCompleted, failed: deleteNoteFailed } =
+  makeCommunicationActionCreators<NS.IDeleteNote, NS.IDeleteNoteComplete, NS.IDeleteNoteFail>(
+    'MANAGE_NOTE:DELETE_NOTE', 'MANAGE_NOTE:DELETE_NOTE_COMPLETE', 'MANAGE_NOTE:DELETE_NOTE_FAIL',
+  );

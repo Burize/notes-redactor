@@ -6,6 +6,7 @@ export interface IReduxState {
     loadingNote: ICommunication;
     creatingNote: ICommunication;
     updatingNote: ICommunication;
+    deletingNote: ICommunication;
   };
   data: {
     note: INote | null,
@@ -24,8 +25,13 @@ export type IUpdateNote = IAction<'MANAGE_NOTE:UPDATE_NOTE', PartialNote>;
 export type IUpdateNoteComplete = IPlainAction<'MANAGE_NOTE:UPDATE_NOTE_COMPLETE'>;
 export type IUpdateNoteFail = IPlainFailAction<'MANAGE_NOTE:UPDATE_NOTE_FAIL'>;
 
+export type IDeleteNote = IAction<'MANAGE_NOTE:DELETE_NOTE', { id: string }>;
+export type IDeleteNoteComplete = IPlainAction<'MANAGE_NOTE:DELETE_NOTE_COMPLETE'>;
+export type IDeleteNoteFail = IPlainFailAction<'MANAGE_NOTE:DELETE_NOTE_FAIL'>;
+
 export type Action =
   | ILoadNoteById | ILoadNoteByIdComplete | ILoadNoteByIdFail
   | ICreateNote | ICreateNoteComplete | ICreateNoteFail
   | IUpdateNote | IUpdateNoteComplete | IUpdateNoteFail
+  | IDeleteNote | IDeleteNoteComplete | IDeleteNoteFail
   ;

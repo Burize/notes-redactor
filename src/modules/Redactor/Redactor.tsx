@@ -9,7 +9,7 @@ import { Redactor } from './view';
 const DomainModule: IModule = {
   getRoutes() {
     return [
-      <Route key="redactor" path={routes.note.path} component={Redactor} />,
+      <Route key="redactor" path={routes.redactor.path} component={Redactor} />,
     ];
   },
 };

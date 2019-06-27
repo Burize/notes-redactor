@@ -25,7 +25,7 @@
     "skipLibCheck": true,
     "noUnusedLocals": true,
     "noUnusedParameters": false,
-    "allowSyntheticDefaultImports": false,
+    "allowSyntheticDefaultImports": true,
     "importHelpers": true,
     "strictPropertyInitialization": true,
     "strictFunctionTypes": false,

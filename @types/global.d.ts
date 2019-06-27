@@ -10,3 +10,17 @@ declare module "worker-loader!*" {
 
   export default WebpackWorker;
 }
+
+declare module "*.svg" {
+  const content: string;
+  export default content;
+}
+declare module '*.png';
+declare module '*.jpg';
+
+declare module 'serviceworker-webpack-plugin';
+declare module 'favicons-webpack-plugin';
+
+declare var serviceWorkerOption: {
+  assets: string[],
+};
