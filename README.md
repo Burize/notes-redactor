@@ -18,7 +18,7 @@ This is PWA app:
 - Webworker(dedicated) for parse markdown / ServiceWorker for cache assets and handle fetch offline.
 
 ### Project launch
-For working at online mode, you need the [back-end rest server](https://github.com/Burize/multi-step-form-backend). However, you can launch project without it and working offline: (there is empty notes list and all next actions will stored at storage)
+For working at online mode, you need the [back-end rest server](https://github.com/Burize/notes-redactor-backend). However, you can launch project without it and working offline: (there is empty notes list and all next actions will stored at storage)
 
 ### NPM scripts
 
