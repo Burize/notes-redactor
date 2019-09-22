@@ -19,13 +19,6 @@ export default function parseMarkdown(markdown: string): string {
     markdown = markdown.replace(key, value as string); // replace cannot infer type for union
   });
 
-  // throttle
-  // const now = Date.now();
-  // while (Date.now() - now < 2 * 1000) {
-  //   //
-  // }
-  // throttle
-
   return markdown;
 }
 

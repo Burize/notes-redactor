@@ -25,9 +25,3 @@ For working at online mode, you need the [back-end rest server](https://github.c
 - ```npm run dev``` for development environment in watch mode
 - ```npm run prod``` for production environment in watch mode
 - ```npm run analyze:dev``` for bundle analyzing
-
-
-
-### TODO
-- Complete layout: parse markdown at notes list and make mobile variant;
-- Add manifest for offer to add app icon for mobile screen.

@@ -31,11 +31,11 @@ export default (props: IProps) => {
   const header = (
     <Header
       leftActions={
-        <ShowNotesButton onNoteSelect={openNote} className={b('header-button')} selectedNoteId={id}>
+        <ShowNotesButton color="red" onNoteSelect={openNote} className={b('header-button')} selectedNoteId={id}>
           <Icon name="list alternate outline" size="large" fitted />
         </ShowNotesButton>}
       rightActions={
-        <CreateNoteButton onCreate={openNote} className={b('header-button')}>
+        <CreateNoteButton color="red" onCreate={openNote} className={b('header-button')}>
           Write something
         </CreateNoteButton>}
     />

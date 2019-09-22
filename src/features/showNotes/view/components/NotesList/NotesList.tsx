@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { List } from 'react-content-loader'
+import { List } from 'react-content-loader';
 
 import { Modal } from 'shared/view/elements';
 import { block } from 'shared/helpers/bem';
-import { INote } from 'shared/types/models';
 
+import { IParsedNote } from '../../../namespace';
 import Note from '../Note/Note';
 
 import './NotesList.scss';
@@ -12,7 +12,7 @@ import './NotesList.scss';
 interface IProps {
   isOpen: boolean;
   isLoading: boolean;
-  notes: INote[];
+  notes: IParsedNote[];
   selectedNoteId?: string;
   onClose(): void;
   onSelect(noteId: string): void;

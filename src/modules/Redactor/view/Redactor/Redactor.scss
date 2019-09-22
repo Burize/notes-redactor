@@ -1,11 +1,8 @@
-@import 'shared/styles/common/index.scss';
+@import "shared/styles/common/index.scss";
 
 .redactor {
   &__header-button {
-    background-color: $red !important;
-    color: white !important;
     font-family: Roboto;
     font-weight: normal;
   }
-
 }

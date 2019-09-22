@@ -1,3 +1,5 @@
+import { NoteId } from './models/note';
+
 export interface IMessageEvent extends MessageEvent {
   data: Message;
 }
@@ -5,7 +7,7 @@ export interface IMessageEvent extends MessageEvent {
 export type Message = ChangeNoteId;
 
 export type ChangeNoteId = IMessage<'changeNoteId', {
-  noteId: string;
+  noteId: NoteId;
 }>;
 
 export interface IMessage<T extends MessageType, P extends object> {

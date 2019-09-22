@@ -1,4 +1,6 @@
-.note {
+.editable-note {
+  height: 100%;
+  overflow: auto;
 
   &__name {
     margin-bottom: 2rem;
@@ -15,4 +17,3 @@
     }
   }
 }
-

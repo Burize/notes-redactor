@@ -1,3 +1,5 @@
 .edit-note {
-  min-height: 300px
+  &__column {
+    height: 30rem;
+  }
 }

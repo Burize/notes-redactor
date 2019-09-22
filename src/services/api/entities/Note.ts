@@ -31,7 +31,7 @@ export default class Note extends BaseApi {
     return this.handleResponse(response, convertNoteResponse);
   }
 
-  public async updateNote(note: PartialNote): Promise<{}> {
+  public async updateNote(note: PartialNote): Promise<void> {
     const response = await this.actions.patch({
       url: `note`,
       data: { ...note },
@@ -39,7 +39,7 @@ export default class Note extends BaseApi {
     return this.handleResponse(response);
   }
 
-  public async deleteNote(id: string): Promise<{}> {
+  public async deleteNote(id: string): Promise<void> {
     const response = await this.actions.delete({
       url: `note`,
       data: { id },

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { block } from 'shared/helpers/bem';
 
-import { INote } from 'shared/types/models';
+import { INote, NoteId } from 'shared/types/models';
 import { markdownManager } from 'services/markdown';
 import { IAppReduxState, ICommunication } from 'shared/types/redux';
 import { Grid, Segment, Loader, Dimmer, Button, Icon } from 'shared/view/elements';
@@ -19,7 +19,7 @@ import './NoteRedactor.scss';
 const b = block('edit-note');
 
 interface IOwnProps {
-  noteId: string;
+  noteId: NoteId;
   onDeleteNote(): void;
 }
 
@@ -31,7 +31,8 @@ interface IStateProps {
 type IActionsDispatch = typeof actionsDispatch;
 
 type IProps = IOwnProps & IActionsDispatch & IStateProps;
-const NoteRedactor = (props: IProps) => {
+
+const NoteRedactor = React.memo((props: IProps) => {
   const { note, updateNote, noteId, loadNote, deleteNote, onDeleteNote, loadingNote } = props;
 
   const [noteTitle, setNoteTitle] = React.useState('');
@@ -45,13 +46,13 @@ const NoteRedactor = (props: IProps) => {
       loadNote({ id: noteId });
       return;
     }
+
     setNoteTitle(note.title);
     setNoteBody(note.body);
-
   }, [noteId]);
 
   useOnChangeState(loadingNote, isCommunicationComplete, () => {
-    if (note) { // TODO: handle if false
+    if (note) {
       setNoteTitle(note.title);
       setNoteBody(note.body);
     }
@@ -61,8 +62,9 @@ const NoteRedactor = (props: IProps) => {
   const debounceNoteBody = useDebounce(noteBody, 1000);
 
   React.useEffect(() => {
-    debounceNoteTitle && debounceNoteBody &&
+    if (debounceNoteTitle && debounceNoteBody) {
       updateNote({ id: noteId, title: debounceNoteTitle, body: debounceNoteBody });
+    }
   }, [debounceNoteTitle, debounceNoteBody]);
 
   const parseMarkdown = async (markdown: string) => {
@@ -78,6 +80,7 @@ const NoteRedactor = (props: IProps) => {
     deleteNote({ id: noteId });
     onDeleteNote();
   }, [noteId]);
+
   return (
     <Segment className={b()}>
       {loadingNote.isRequesting &&
@@ -88,25 +91,25 @@ const NoteRedactor = (props: IProps) => {
         )}
       {!loadingNote.isRequesting && note &&
         (
-          <Grid columns="equal" className={b()}>
-            <Grid.Row>
+          <Grid container columns={2} divided relaxed stackable className={b()}>
+            <Grid.Column className={b('column')}>
+              <RawMarkdown value={noteBody} onChange={setNoteBody} />
+            </Grid.Column>
+            <Grid.Column className={b('column')}>
+              <Note title={noteTitle} onTitleChange={setNoteTitle} body={parsedMarkdown} />
+            </Grid.Column>
+            <Grid.Row textAlign="right" columns={1}>
               <Grid.Column>
-                <RawMarkdown value={noteBody} onChange={setNoteBody} />
+                <Button onClick={onDelete} color="red">
+                  <Icon name="trash alternate" size="large" fitted />
+                </Button>
               </Grid.Column>
-              <Grid.Column>
-                <Note title={noteTitle} onTitleChange={setNoteTitle} body={parsedMarkdown} />
-              </Grid.Column>
-            </Grid.Row>
-            <Grid.Row textAlign="right" >
-              <Button onClick={onDelete}>
-                <Icon name="trash alternate" size="large" fitted />
-              </Button>
             </Grid.Row>
           </Grid>
         )}
     </Segment>
   );
-};
+});
 
 function mapState(state: IAppReduxState): IStateProps {
   return {

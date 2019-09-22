@@ -1,10 +1,17 @@
+import { NoteId, TemporaryId, INote } from 'shared/types/models';
+
 export interface IServerNote {
-  id: string;
+  id: NoteId;
   title: string;
   body: string;
 }
 
-export interface ISyncNoteResponse {
+export interface IServerSyncNote {
   note: IServerNote;
-  rawId: string;
+  TemporaryId: string;
+}
+
+export interface ISyncNotes {
+  notes: INote[];
+  idsMap: Record<TemporaryId, NoteId>;
 }

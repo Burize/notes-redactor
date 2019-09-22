@@ -4,15 +4,13 @@ import { connect } from 'react-redux';
 import { GetProps } from 'shared/types/utils';
 import { IAppReduxState, ICommunication } from 'shared/types/redux';
 import { Button } from 'shared/view/elements';
-import { INote } from 'shared/types/models';
 
 import { selectors, actions } from '../../../redux';
 import { NotesList } from '../../components';
-
-import './ShowNotesButton.scss';
+import { IParsedNote } from '../../../namespace';
 
 interface IStateProps {
-  notes: INote[];
+  notes: IParsedNote[];
   loadingNotes: ICommunication;
   selectedNoteId?: string;
 }
@@ -25,19 +23,20 @@ interface IOwnProps {
 }
 
 type IProps = IOwnProps & IActionsDispatch & IStateProps & GetProps<typeof Button>;
+
 const ShowNotesButton = (props: IProps) => {
   const { children, onNoteSelect, notes, loadNotes, loadingNotes, selectedNoteId, ...buttonProps } = props;
   const [isOpen, setIsOpen] = React.useState(false);
 
   const openNoteList = React.useCallback(() => {
-    setIsOpen(!isOpen);
+    setIsOpen(true);
     loadNotes();
   }, []);
-  const closeModal = React.useCallback(() => setIsOpen(false), []);
   const onSelect = React.useCallback((noteId: string) => {
     setIsOpen(false);
     onNoteSelect(noteId);
   }, []);
+  const closeModal = React.useCallback(() => setIsOpen(false), []);
 
   return (
     <>

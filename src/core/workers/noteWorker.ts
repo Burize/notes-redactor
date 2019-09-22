@@ -1,7 +1,7 @@
 import { convertNoteResponse, convertSynchronizeNotesResponse } from 'services/api/converters';
 import { storage } from 'services/storage';
-import { IServerNote, ISyncNoteResponse } from 'services/api/types/Note';
-import { NoteFieldsForCreation, INote } from 'shared/types/models';
+import { IServerNote, IServerSyncNote } from 'services/api/types/Note';
+import { NoteFieldsForCreation, INote, TemporaryId, NoteId } from 'shared/types/models';
 import getEnvParams from 'shared/helpers/getEnvParams';
 import { ChangeNoteId } from 'shared/types/message';
 
@@ -51,22 +51,24 @@ async function refreshNotes() {
     body: JSON.stringify(stashedNotes),
     headers: { 'Content-Type': 'application/json' },
   });
-  const refreshedNotes: ISyncNoteResponse[] = await response.json();
+  const refreshedNotes: IServerSyncNote[] = await response.json();
 
   const { notes, idsMap } = convertSynchronizeNotesResponse(refreshedNotes);
   await storage.synchronizeStorage(notes);
   await updateTemporaryId(idsMap);
 }
 
-export async function updateTemporaryId(idsMap: Record<string, string>) {
+export async function updateTemporaryId(idsMap: Record<TemporaryId, NoteId>) {
   const clients = await _self.clients.matchAll({ type: 'window' });
   clients.forEach(client => {
     const urlMatch = client.url.match(urlsRegExp.redactorRegExp);
     if (!urlMatch) { return; }
 
-    const [, noteId] = urlMatch;
-    if (idsMap[noteId] !== noteId) {
-      const message: ChangeNoteId = { type: 'changeNoteId', payload: { noteId } };
+    const [, currentNoteId] = urlMatch as [string, NoteId];
+
+    const noteIdFromServer = (idsMap as any)[currentNoteId] as NoteId;
+    if (noteIdFromServer !== currentNoteId) {
+      const message: ChangeNoteId = { type: 'changeNoteId', payload: { noteId: noteIdFromServer } };
       client.postMessage(message);
     }
   });

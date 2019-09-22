@@ -1,10 +1,8 @@
 // tslint:disable: interface-over-type-literal
 import * as IDB from 'idb';
-// import uuid from 'uuid';
 import ObjectID from 'bson-objectid';
 
-
-import { INote, NoteFieldsForCreation } from 'shared/types/models';
+import { INote, NoteFieldsForCreation, NoteId } from 'shared/types/models';
 
 interface INoteStorage {
   createNote: CreateNote;
@@ -126,7 +124,7 @@ class NoteStorage implements INoteStorage {
 
   private async createTemporaryNote(noteRequest: NoteFieldsForCreation) {
     const { store, tx } = await this.createTx();
-    const note: INote = { ...noteRequest, id: ObjectID.generate() };
+    const note: INote = { ...noteRequest, id: ObjectID.generate() as NoteId };
     await store.add(note);
     await tx.done;
     return note;

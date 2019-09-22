@@ -1,15 +1,19 @@
-@import 'shared/styles/common/index.scss';
+@import "shared/styles/common/index.scss";
+
+$hoverBackground: #efefef;
 
 .note {
   padding: 0.5rem;
   cursor: pointer;
 
+  $r: &;
+
   &:hover {
-    background-color: #EFEFEF;
+    background-color: $hoverBackground;
   }
 
   &_active {
-    border-left: solid $red 5px
+    border-left: solid $red 5px;
   }
   &__title {
     margin-bottom: 0.4rem;
@@ -18,9 +22,25 @@
   }
 
   &__body {
-    color: #A0A0A0;
+    position: relative;
+    height: 2.5rem;
     overflow: hidden;
-    word-wrap: none;
+    color: #a0a0a0;
+    white-space: pre-line;
+
+    &::after {
+      content: "";
+      display: block;
+      height: 1rem;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(-180deg, rgba(255, 255, 255, 0) 0%, white 100%);
+
+      #{$r}:hover & {
+        background: linear-gradient(-180deg, rgba(255, 255, 255, 0) 0%, $hoverBackground 100%);
+      }
+    }
   }
 }
-

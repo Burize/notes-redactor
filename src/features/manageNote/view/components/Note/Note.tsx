@@ -11,7 +11,7 @@ interface IProps {
   onTitleChange(title: string): void;
 }
 
-const b = block('note');
+const b = block('editable-note');
 
 function ParsedMarkdown(props: IProps) {
   const { body, title, onTitleChange } = props;
@@ -31,7 +31,7 @@ function ParsedMarkdown(props: IProps) {
         value={title}
         onChange={changeTitleHandler}
       />
-      <div dangerouslySetInnerHTML={{ __html: body }} />
+      <div className={b('body')} dangerouslySetInnerHTML={{ __html: body }} />
     </div>
   );
 }

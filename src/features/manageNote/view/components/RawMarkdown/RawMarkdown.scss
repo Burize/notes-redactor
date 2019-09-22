@@ -1,5 +1,8 @@
 .raw-markdown {
+  height: 100%;
+
   &__text-field {
+    height: 100%;
     width: 100%;
     resize: none;
     outline: none;
@@ -9,7 +12,7 @@
     font-size: 22px;
     font-weight: 500;
     color: #333333;
-    caret-color: #E06D72;
-    background-color: rgba(0,0,0,0);
+    caret-color: #e06d72;
+    background-color: rgba(0, 0, 0, 0);
   }
 }

@@ -21,7 +21,7 @@ function RawMarkdown(props: IProps) {
 
   return (
     <div className={b()}>
-      <textarea className={b('text-field')} value={value} onChange={onMarkdownChange} rows={15} />
+      <textarea className={b('text-field')} value={value} onChange={onMarkdownChange} />
     </div>
   );
 }

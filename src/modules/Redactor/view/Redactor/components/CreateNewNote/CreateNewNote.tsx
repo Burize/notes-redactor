@@ -18,7 +18,7 @@ function CreateNewNote(props: IProps) {
     <div className={b()}>
       <div className={b('content')}>
         <img src={noteStub} className={b('preview')} />
-        <CreateNoteButton onCreate={onCreateNote} key="createNote">Create new note</CreateNoteButton>
+        <CreateNoteButton onCreate={onCreateNote}>Create new note</CreateNoteButton>
       </div>
     </div>
   );
