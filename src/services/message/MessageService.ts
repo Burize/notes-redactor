@@ -10,7 +10,9 @@ export class MessageService {
 
   public init(handlers: MessageHandlerByType) {
     this.messageHandlers = { ...handlers };
-    navigator.serviceWorker.addEventListener('message', this.receiveMessage);
+    if (navigator.serviceWorker) {
+      navigator.serviceWorker.addEventListener('message', this.receiveMessage);
+    }
   }
 
   private receiveMessage(event: IMessageEvent) {

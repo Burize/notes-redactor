@@ -1,0 +1,16 @@
+{
+  "short_name": "Markdown redactor",
+  "name": "Markdown redactor",
+  "icons": [
+    {
+      "src": "/assets/favicon.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/redactor",
+  "background_color": "white",
+  "display": "standalone",
+  "scope": "/",
+  "theme_color": "white"
+}

@@ -33,6 +33,7 @@ const config: webpack.Configuration & { devServer: any } = { // devServer is not
   devServer: {
     host: 'localhost',
     port: 8000,
+    contentBase: commonPaths.contentBase,
     historyApiFallback: true,
     hot: true,
     open: true,

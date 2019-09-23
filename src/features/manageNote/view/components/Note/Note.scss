@@ -16,4 +16,13 @@
       border-bottom: solid red 1px;
     }
   }
+
+  & ul {
+    padding: 0;
+    padding-left: 2rem;
+  }
+
+  & code {
+    background-color: rgba(27, 31, 35, 0.05);
+  }
 }
