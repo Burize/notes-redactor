@@ -1,6 +1,6 @@
 import { BindAll } from 'lodash-decorators';
 
-import { INote, NoteFieldsForCreation, PartialNote } from 'shared/types/models';
+import { INote, NoteFieldsForCreation, PartialNote, NoteId } from 'shared/types/models';
 
 import BaseApi from './BaseApi';
 import { convertNoteResponse } from '../converters';
@@ -16,7 +16,7 @@ export default class Note extends BaseApi {
     return this.handleResponse<IServerNote[], INote[]>(response, (notes) => notes.map(convertNoteResponse));
   }
 
-  public async loadNoteById(id: string): Promise<INote> {
+  public async loadNoteById(id: NoteId): Promise<INote> {
     const response = await this.actions.get<IServerNote>({
       url: `note/${id}`,
     });
@@ -39,7 +39,7 @@ export default class Note extends BaseApi {
     return this.handleResponse(response);
   }
 
-  public async deleteNote(id: string): Promise<void> {
+  public async deleteNote(id: NoteId): Promise<void> {
     const response = await this.actions.delete({
       url: `note`,
       data: { id },

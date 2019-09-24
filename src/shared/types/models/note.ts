@@ -1,7 +1,7 @@
-import { Branding } from '../utils';
+import { Flavoring, PartialBy } from '../utils';
 
-export type NoteId = Branding<'noteId', string>;
-export type TemporaryId = Branding<'temporaryId', string>;
+export type NoteId = Flavoring<'noteId', string>;
+export type TemporaryId = Flavoring<'temporaryId', string>;
 
 export interface INote {
   id: NoteId;
@@ -11,4 +11,4 @@ export interface INote {
 
 export type NoteFieldsForCreation = Omit<INote, 'id'>;
 
-export type PartialNote = Partial<INote>;
+export type PartialNote = PartialBy<INote, 'title' | 'body'>;

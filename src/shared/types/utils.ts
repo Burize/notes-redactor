@@ -7,4 +7,6 @@ export type GetProps<T extends React.ComponentType<any>> =
 export type ReturnPromisedType<T extends (...args: any[]) => any> =
   T extends (...args: any[]) => Promise<infer R> ? R : ReturnType<T>;
 
-export type Branding<B, T> = { _type: B } & T;
+export type Flavoring<B, T> = { _type?: B } & T;
+
+export type PartialBy<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>;

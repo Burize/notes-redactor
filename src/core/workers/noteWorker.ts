@@ -64,9 +64,9 @@ export async function updateTemporaryId(idsMap: Record<TemporaryId, NoteId>) {
     const urlMatch = client.url.match(urlsRegExp.redactorRegExp);
     if (!urlMatch) { return; }
 
-    const [, currentNoteId] = urlMatch as [string, NoteId];
+    const [, currentNoteId] = urlMatch as [string, TemporaryId];
 
-    const noteIdFromServer = (idsMap as any)[currentNoteId] as NoteId;
+    const noteIdFromServer = (idsMap as Record<string, NoteId>)[currentNoteId];
     if (noteIdFromServer !== currentNoteId) {
       const message: ChangeNoteId = { type: 'changeNoteId', payload: { noteId: noteIdFromServer } };
       client.postMessage(message);
